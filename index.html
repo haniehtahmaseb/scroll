@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .row {
+            width: 100%;
+            display: flex;
+            flex-wrap: wrap;
+        }
+
+        li {
+            list-style-type: none;
+        }
+
+        a {
+            text-decoration: none;
+            color: white;
+        }
+
+        @font-face {
+            font-family: jucci;
+            src: url(asset/helvetica-neue-5/HelveticaNeueLight.otf);
+            font-weight: 400;
+            font-style: normal;
+        }
+
+        body {
+            height: 10000px;
+            width: 100%;
+
+            main {
+                width: 100%;
+                background-color: rgb(32, 30, 30);
+                display: flex;
+                flex-wrap: wrap;
+                height: 100vh;
+                color: white;
+                font-family: jucci;
+                position: fixed;
+                top: 0;
+                left: 0;
+
+                >.bg {
+                    width: 100%;
+                    height: 100%;
+                    background-position: center;
+                    background-repeat: no-repeat;
+                    background-size: cover;
+                    transition: 2s linear;
+                    position: absolute;
+                    left: 0;
+                    filter: contrast(200%);
+
+                    &:nth-of-type(1) {
+                        background-image: url(asset/img/bg1.jpg);
+                    }
+
+                    &:nth-of-type(2) {
+                        background-image: url(asset/img/bg2.jpg);
+                    }
+
+                    &:nth-of-type(3) {
+                        background-image: url(asset/img/bg3.jpg);
+                    }
+                }
+
+
+                >.frame {
+                    position: fixed;
+
+                    >header {
+                        position: fixed;
+                        top: 0;
+                        justify-content: space-evenly;
+                        align-items: center;
+                        height: 100px;
+
+                        >* {
+                            width: 30%;
+                            display: flex;
+                            justify-content: center;
+                        }
+
+                        >h2 {
+                            font-family: 'Courier New', Courier, monospace;
+                            font-size: 30px;
+                        }
+
+                        >ul {
+                            display: flex;
+                            justify-content: space-evenly;
+
+                            &:last-of-type {
+                                justify-content: flex-end;
+                                gap: 20px;
+                            }
+
+                            >li {
+                                display: flex;
+                                flex-wrap: nowrap;
+                                justify-content: center;
+                                align-items: center;
+                                font-size: 14px;
+
+                                >a {
+                                    text-transform: capitalize;
+                                    position: relative;
+
+                                    &::after {
+                                        content: '';
+                                        display: flex;
+                                        width: 0;
+                                        height: 1px;
+                                        background-color: rgba(255, 255, 255, 0.462);
+                                        transition: 0.4s linear;
+                                        position: absolute;
+                                        top: 100%;
+                                        left: 0;
+                                    }
+
+                                    &:hover::after {
+                                        width: 100%;
+
+                                    }
+                                }
+
+                                >span {
+                                    width: 30px;
+                                    height: 30px;
+                                    display: flex;
+                                    justify-content: center;
+                                    align-items: center;
+                                    border-radius: 50px;
+                                    background-color: rgba(255, 255, 255, 0.462);
+                                    margin-left: 10px;
+                                    font-size: 12px;
+                                }
+
+                            }
+                        }
+                    }
+
+                    >#numlist {
+                        position: fixed;
+                        top: 50%;
+                        left: 96%;
+                        transform: translateY(-50%);
+                        line-height: 50px;
+                        font-size: 12px;
+
+                        >li {
+                            opacity: 0.5;
+
+                            >span {
+                                transition: 2s linear;
+                                display: inline-block;
+                                width: 0;
+                                height: 1px;
+                                background-color: white;
+                                margin-left: 20px;
+                            }
+
+                            &:first-of-type>span {
+                                width: 30px;
+                            }
+                        }
+                    }
+
+                    >.side {
+                        position: fixed;
+                        top: 80%;
+                        left: 90%;
+                        rotate: -90deg;
+                        display: flex;
+                        width: 200px;
+                        flex-wrap: wrap;
+
+                        >span {
+                            font-size: 25px;
+                            font-weight: bold;
+                            text-transform: uppercase;
+                        }
+                    }
+
+                }
+
+                >.packs {
+                    width: 100%;
+                    height: 100vh;
+
+                    >div {
+                        width: 50%;
+                        position: absolute;
+                        left: 25%;
+                        display: flex;
+                        justify-content: center;
+                        transition: 2s cubic-bezier(.35, -0.43, .43, .8);
+                        transform-origin: center;
+
+                        >img {
+                            width: 50%;
+                            object-fit: cover;
+                            position: absolute;
+
+                            &:first-of-type {
+                                top: -50px;
+                                left: 0;
+                            }
+
+                            &:last-of-type {
+                                top: 0;
+                                right: 0;
+                            }
+                        }
+
+                    }
+                }
+            }
+
+            .text {
+                display: flex;
+                flex-wrap: wrap;
+                position: fixed;
+                top: 50%;
+                left: 10%;
+
+                >div {
+                    width: 100%;
+                    overflow-y: hidden;
+
+                    >span {
+                        transition: 1s linear;
+                        display: block;
+                        width: 100%;
+                        text-transform: uppercase;
+                        font-size: 80px;
+                        font-weight: bolder;
+                        line-height: 100px;
+                    }
+                }
+
+            }
+        }
+
+        .show {
+            top: 25%;
+            opacity: 1;
+        }
+
+        .showbg {
+            top: 0;
+            opacity: 1;
+        }
+
+        .top {
+            top: -1000px;
+            opacity: 0;
+        }
+
+        .bottom {
+            top: 1000px;
+            opacity: 0;
+        }
+
+        /* footer */
+        .animated-footer {
+            position: fixed;
+            bottom: 0;
+            right: 0;
+            background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            text-align: center;
+            padding: 40px 20px;
+            animation: fadeInUp 1s ease forwards;
+            /* border-radius: 64% 36% 70% 30% / 54% 66% 34% 46%; */
+            border-radius: 70% 30% 47% 53% / 66% 67% 33% 34%;
+            transition: 1s;
+            transform-origin: right bottom;
+
+            >.footer-img {
+                width: 130px;
+                border-radius: 50%;
+                margin-bottom: 10px;
+                opacity: 0;
+                animation: fadeIn 1.5s ease-out forwards;
+                animation-delay: 0.5s;
+            }
+
+            >.footer-socials {
+                margin-top: 15px;
+
+                >.social-icon {
+                    display: inline-block;
+                    margin: 0 15px;
+                    text-decoration: none;
+                    color: #fff;
+                    font-weight: bold;
+                    transition: transform 0.3s ease, color 0.3s ease;
+                    font-size: 14px;
+
+                    &:hover {
+                        transform: scale(1.3);
+                        color: #96bcbc;
+                    }
+                }
+            }
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .scale {
+            scale: 0.5;
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <div class="bg show1"></div>
+        <div class="bg bottom"></div>
+        <div class="bg bottom"></div>
+        <div class="frame row">
+            <header class="row">
+                <ul>
+                    <li><a href="">mens</a></li>
+                    <li><a href="">womans</a></li>
+                    <li><a href="">collections</a></li>
+                </ul>
+                <h2>wings+horns</h2>
+                <ul>
+                    <li><a href="">say hi</li>
+                    <li><a href="">cart</a><span>0</span></li>
+                </ul>
+            </header>
+            <ul id="numlist">
+                <li>01<span></span></li>
+                <li>02<span></span></li>
+                <li>03<span></span></li>
+            </ul>
+            <div class="side">
+                <span>wings+horns</span>
+                <span>x kyoto black</span>
+            </div>
+        </div>
+        <div class="packs">
+            <div class="show">
+                <img src="asset/img/photo1.jpg" alt="">
+                <img src="asset/img/photo2.jpg" alt="">
+            </div>
+            <div class="bottom">
+                <img src="asset/img/photo3.jpg" alt="">
+                <img src="asset/img/photo4.jpg" alt="">
+            </div>
+            <div class="bottom">
+                <img src="asset/img/photo5.jpg" alt="">
+                <img src="asset/img/photo6.jpg" alt="">
+            </div>
+        </div>
+        <div class="text">
+            <div><span>black is</span></div>
+            <div><span>timless.black is</span></div>
+            <div><span>the color of</span></div>
+            <div><span>eternity</span></div>
+        </div>
+        <!-- footre -->
+
+        <footer class="animated-footer">
+            <img src="asset/img/IMG_8049 (2).PNG" alt="Your Name" class="footer-img">
+            <p>Crafted by <strong>hani</strong></p>
+            <div class="footer-socials">
+                <a target="_blank" href="https://github.com/haniehtahmaseb" class="social-icon">GitHub</a>
+                <a target="_blank" href="https://www.linkedin.com/in/hani-tahmaseb-a52212212"
+                    class="social-icon">LinkedIn</a>
+                <a target="_blank" href="https://www.instagram.com/htahmaseb_dev" class="social-icon">Instagram</a>
+            </div>
+        </footer>
+
+        <!-- footre -->
+    </main>
+</body>
+<script>
+    const sec = document.querySelectorAll('.packs>div')
+    const main = document.querySelector('main')
+    const grid = document.querySelector('.packs')
+    const line = document.querySelectorAll('#numlist>li>span')
+    const num = document.querySelectorAll('#numlist>li')
+    const bg = document.querySelectorAll('main>.bg')
+    const txt = document.querySelectorAll('.text>div>span')
+
+
+
+    let oldSc = 0
+    let st = 0
+    let myStatus = true
+    let turn = 0
+
+    window.addEventListener('scroll', () => {
+        st = parseInt(window.scrollY)
+        if (myStatus) {
+            if (st > oldSc) {
+                console.log('down...');
+                if (turn < (sec.length - 1)) {
+                    sec[turn].classList.remove('show')
+                    sec[turn].classList.add('top')
+                    bg[turn].classList.remove('show1')
+                    bg[turn].classList.add('top')
+                    num[turn].style.opacity = '0.5'
+                    turn++
+                    sec[turn].classList.remove('bottom')
+                    sec[turn].classList.add('show')
+                    bg[turn].classList.remove('bottom')
+                    bg[turn].classList.add('show1')
+                    line[turn - 1].style.width = '0'
+                    line[turn].style.width = '30px'
+                    num[turn].style.opacity = '1'
+                    text()
+                }
+
+            } else {
+                console.log('up...');
+                if (turn > 0) {
+                    sec[turn].classList.remove('show')
+                    sec[turn].classList.add('bottom')
+                    bg[turn].classList.remove('show1')
+                    bg[turn].classList.add('bottom')
+                    num[turn].style.opacity = '0.5'
+                    turn--
+                    sec[turn].classList.remove('top')
+                    sec[turn].classList.add('show')
+                    bg[turn].classList.remove('top')
+                    bg[turn].classList.add('show1')
+                    line[turn + 1].style.width = '0'
+                    line[turn].style.width = '30px'
+                    num[turn].style.opacity = '1'
+
+                    text()
+                }
+
+            }
+            setTimeout(() => {
+                myStatus = true
+            }, 2000);
+        }
+        oldSc = st
+        myStatus = false
+    })
+
+    function text() {
+        txt.forEach((val) => {
+            if (turn != 0) {
+                val.style.transform = 'translateY(-100px)';
+            } else {
+                val.style.transform = 'translateY(0)';
+
+            }
+        })
+    }
+</script>
+
+</html>
